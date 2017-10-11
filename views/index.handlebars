@@ -1,31 +1,45 @@
-<h1>Eat dat Burger!!</h1>
+<div class="row"><div class="col s12 m4">
 
-<ul>
-<li>Uneaten Burgers</li>
-	{{#each burgers}}
-		{{#unless this.devoured}}
-			<li>
-				
-				<form action="/{{this.id}}" method="POST">
-					<input type="hidden" name="name" value={{this.burger_name}} />
-					<input type="hidden" name="devoured" value={{this.devoured}} />
-					{{this.burger_name}} &nbsp; <input type="submit" value="Devour It!" />
-				</form>
-			</li>
-		{{/unless}}
-	{{/each}}
-</ul>
-<ul>
-<li>Eaten Burgers</li>
-	{{#each burgers}}
-		{{#if this.devoured}}
-			<li>
-				{{this.burger_name}}
-			</li>
-		{{/if}}
-	{{/each}}
-</ul>
-<form action="/" method="POST">
-	<input type="text" name="newBurgerName" />
-	<input type="submit" />
-</form>
+	<strong class="green-text">Uneaten Burgers</strong>
+	<ol>
+		<!-- Loop thru all burger and only show un-eaten ones here -->
+		{{#each burgers}}
+			{{#unless this.devoured}}
+				<li>
+					<!-- button that allows for burger eaten state to change -->
+					<form action="/{{this.id}}" method="POST">
+						<input type="hidden" name="burgerName" value="{{this.burger_name}}" />
+						<input type="hidden" name="devoured" value={{this.devoured}} />
+						<div class="row">
+							<div class="col s6">					
+								{{this.burger_name}}
+							</div>
+								<input class="btn" type="submit" value="Devour It!" />
+							<div class="col s6">					
+							</div>
+						</div>
+					</form>
+				</li>
+			{{/unless}}
+		{{/each}}
+	</ol>
+</div><div class="col s12 m4">
+	<strong class="red-text">Eaten Burgers</strong>
+	<ol>
+		<!-- Loop thru all burger and only show eaten ones here -->
+		{{#each burgers}}
+			{{#if this.devoured}}
+				<li>
+					{{this.burger_name}}
+				</li>
+			{{/if}}
+		{{/each}}
+	</ol>
+</div><div class="col s12 m4">
+	<strong class="blue-text">Add a New Burger</strong>
+	<!-- Form to add a nw burger by name -->
+	<form action="/" method="POST">
+		<input placeholder="Burger Name" type="text" name="newBurgerName" />
+		<input class="btn" type="submit" />
+	</form>
+<div></div>
